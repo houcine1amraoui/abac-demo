@@ -5,12 +5,7 @@ import "dotenv/config";
 import dayjs from "dayjs";
 
 import { loadUsers, addUser } from "./users_db.js";
-import {
-  loadPosts,
-  addPost,
-  deletePostById,
-  updatePostTitleById,
-} from "./posts_db.js";
+import { loadPosts } from "./posts_db.js";
 import { isAuthenticated } from "./middleware/auth.js";
 import { canAccessPost } from "./middleware/abac.js";
 
@@ -41,64 +36,6 @@ app.get("/posts/:id", isAuthenticated, async (req, res) => {
   }
 
   res.json(post);
-});
-
-// get all posts
-app.get("/posts", isAuthenticated, async (req, res) => {
-  const username = req.username;
-  const posts = loadPosts();
-  res.json(posts.filter((post) => post.author === username));
-});
-
-//
-app.post("/posts", isAuthenticated, async (req, res) => {
-  const { title } = req.body;
-  if (!title) {
-    return res.send("Post title are required");
-  }
-
-  addPost(title);
-  res.send("Post created successfully");
-});
-
-//
-app.put("/posts/:id", isAuthenticated, async (req, res) => {
-  const { id } = req.params;
-  const { title } = req.body;
-  const posts = loadPosts();
-  const exist = posts.find((p) => p.id === id);
-  if (!exist) {
-    return res.send("Post with given id does not exist");
-  }
-
-  updatePostTitleById(id, title);
-  res.send("Post updated successfully");
-});
-
-//
-app.delete("/posts/:id", isAuthenticated, async (req, res) => {
-  const { id } = req.params;
-  const posts = loadPosts();
-  const exist = posts.find((p) => p.id === id);
-  if (!exist) {
-    return res.send("Post with given id does not exist");
-  }
-
-  deletePostById(id);
-  res.send("Post deleted successfully");
-});
-
-// also called signup
-app.post("/register", async (req, res) => {
-  const { username, password, role } = req.body;
-  if (!username || !password || !role) {
-    return res.json("All fields are required");
-  }
-  const user = addUser(username, password, role);
-  res.json({
-    message: "User created",
-    user: { id: user.id, username: user.username, role: user.role },
-  });
 });
 
 // also called signin

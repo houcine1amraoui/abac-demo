@@ -1,17 +1,11 @@
 [
   {
     "id": 1,
-    "username": "admin",
-    "password": "admin",
-    "role": "admin"
-  },
-  {
-    "id": 2,
     "username": "mohamed-msila",
     "password": "mohamed2025"
   },
   {
-    "id": 3,
+    "id": 2,
     "username": "amina-msila",
     "password": "amina2025"
   }
