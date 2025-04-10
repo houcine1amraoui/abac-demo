@@ -3,14 +3,14 @@
     "id": "1",
     "title": "Post 1",
     "status": "draft",
-    "authorId": "mohamed-msila",
+    "author": "mohamed-msila",
     "createdAt": "2025-04-01T10:00:00Z"
   },
   {
     "id": "2",
     "title": "Post 2",
     "status": "draft",
-    "authorId": "amina-msila",
+    "author": "amina-msila",
     "createdAt": "2025-04-02T12:00:00Z"
   },
   {

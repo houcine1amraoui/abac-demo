@@ -1,16 +1,16 @@
 import dayjs from "dayjs";
 
 export const policies = [
-  // 1. Author can ony access their own posts
+  // 1. Draft posts can ony be viewed by their owners
   ({ user, resource }) => {
-    return resource.status === "draft" && resource.authorId === user.id;
+    return resource.status === "draft" && resource.author === user.username;
   },
 
   // 2. Everyone can view published posts but only between 6 AM and 10 PM
   ({ resource, environment }) => {
     if (resource.status !== "published") return false;
     const hour = dayjs(environment.time).hour();
-    return hour >= 6 && hour < 22;
+    return hour >= 6 && hour < 20;
   },
 ];
 
