@@ -10,7 +10,7 @@ export const policies = [
   ({ resource, environment }) => {
     if (resource.status !== "published") return false;
     const hour = dayjs(environment.time).hour();
-    return hour >= 6 && hour < 20;
+    return hour >= 18 && hour < 20;
   },
 ];
 

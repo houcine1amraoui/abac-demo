@@ -17,17 +17,22 @@ app.use(cookieParser());
 app.get("/posts/:id", isAuthenticated, async (req, res) => {
   const { id } = req.params;
   const posts = loadPosts();
+
+  // check if post exist
   const post = posts.find((p) => p.id === id);
   if (!post) {
     return res.send("Post with given id does not exist");
   }
 
+  // create context
   const context = {
     user: req.user,
     resource: post,
     environment: {
       time: dayjs(),
       ip: req.ip,
+      // geolocation,
+      // etc,
     },
   };
 
