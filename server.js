@@ -36,6 +36,7 @@ app.get("/posts/:id", isAuthenticated, async (req, res) => {
     },
   };
 
+  // e.g., context = {user: mohamed-msila; post: post 1; time: 8PM}
   if (!canAccessPost(context)) {
     return res.status(403).json({ error: "Access denied" });
   }
